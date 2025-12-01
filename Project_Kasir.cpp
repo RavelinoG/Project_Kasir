@@ -59,24 +59,41 @@ string Nama_Kategori[5] = {
     "Makanan"
 };
 
-void Simpan_Transaksi(const string &Isi){
-    ofstream file("transaksi.txt", ios::app);
-    if(file.is_open()){
-        file << Isi << '\n';
-        file.close();
-    } else {
-        cout << "Gagal membuka file transaksi.txt" << endl;
+void Menu_Utama(){;
+    string Menu[4] = {
+        "Transaksi",
+        "Data Barang",
+        "Riwayat Transaksi",
+        "Hapus Riwayat"
+    };
+
+    int Lokasi = 0;
+
+    while(true){
+        ClearScreen();
+        cout << "======= APLIKASI KASIR =======" << '\n\n';
+
+        for(int i=0; i<4; i++){
+            if(i == Lokasi) cout << "> ";
+            else cout << "  ";
+            cout << Menu[i] << '\n';
+        }
+
+        cout << "\n" << "W/S untuk navigasi, ENTER untuk pilih.";
+
+        char T = getch();
+        if(T == 'w' || T == 'W') Lokasi = (Lokasi + 3) % 4;
+        else if(T == 's' || T == 'S') Lokasi = (Lokasi + 1) % 4;
+        else if(T == 13){
+            if(Lokasi == 0) Menu_Transaksi();
+            else if(Lokasi == 1) Menu_Data_Barang();
+            else if(Lokasi == 2) Menu_Riwayat();
+            else if(Lokasi == 3) Menu_Hapus_Riwayat();
+         }
     }
 }
 
-void Tampilkan_Kategori(){
-    ClearScreen();
-    cout << "====== KATEGORI BARANG ======" << '\n';
-
-    for(int i = 0; i < 5; i++){
-        cout << i+1 << ". " << Nama_Kategori[i] << '\n';
-    }
-    cout << "=====================" << endl;
-    cout << "Tekan ENTER untuk kembali ";
-    getch();
+int main (){
+    Menu_Utama();
+    return 0;
 }
