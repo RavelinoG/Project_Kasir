@@ -238,4 +238,4 @@ int main (){
     return 0;
 }
 
-semangat guys
+gas
