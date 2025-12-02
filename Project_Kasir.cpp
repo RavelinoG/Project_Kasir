@@ -59,7 +59,7 @@ string Nama_Kategori[5] = {
     "Makanan"
 };
 
-void menu_hapus_riwayat(){
+void Menu_Hapus_Riwayat(){
     int lokasi = 0;
     string pilihan[2] = {"ya", "tidak"};
     while(true){
