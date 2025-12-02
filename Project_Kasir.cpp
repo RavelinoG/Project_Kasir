@@ -59,6 +59,43 @@ string Nama_Kategori[5] = {
     "Makanan"
 };
 
+void menu_hapus_riwayat(){
+    int lokasi = 0;
+    string pilihan[2] = {"ya", "tidak"};
+    while(true){
+        ClearScreen();
+        cout << "======= HAPUS RIWAYAT TRANSAKSI =======" << '\n' << '\n';
+        cout << "Apakah anda yakin ingin menghapus riwayat transaksi?" << '\n' << '\n';
+
+        for(int i=0; i<2; i++){
+                if(i == lokasi) cout << "=> ";
+              else cout << "  ";
+                cout << pilihan[i] << '\n';
+     }
+        cout << "\n" << "W/S untuk navigasi, ENTER untuk pilih.";
+
+        char t = getch();
+        if(t == 'w' || t == 'W')
+        lokasi = (lokasi + 1) % 2;
+        else if(t == 's' || t == 'S')
+        lokasi = (lokasi + 1) % 2;
+        else if(t == 13){
+            if(lokasi == 0){
+            ofstream file;
+            file.open("transaksi.txt", ios::trunc);
+            file.close();
+            cout << "\n" << "Riwayat transaksi telah dihapus.";
+            cout << "\n" << "Tekan ENTER untuk kembali...";
+            getch();
+            return;
+            } 
+            else if(lokasi == 1){
+                return;
+            }
+        }
+    }
+}
+
 void Menu_Utama(){;
     string Menu[4] = {
         "Transaksi",
@@ -74,7 +111,7 @@ void Menu_Utama(){;
         cout << "======= APLIKASI KASIR =======" << '\n\n';
 
         for(int i=0; i<4; i++){
-            if(i == Lokasi) cout << "> ";
+            if(i == Lokasi) cout << "=> ";
             else cout << "  ";
             cout << Menu[i] << '\n';
         }
@@ -82,8 +119,10 @@ void Menu_Utama(){;
         cout << "\n" << "W/S untuk navigasi, ENTER untuk pilih.";
 
         char T = getch();
-        if(T == 'w' || T == 'W') Lokasi = (Lokasi + 3) % 4;
-        else if(T == 's' || T == 'S') Lokasi = (Lokasi + 1) % 4;
+        if(T == 'w' || T == 'W') 
+        Lokasi = (Lokasi + 3) % 4;
+        else if(T == 's' || T == 'S') 
+        Lokasi = (Lokasi + 1) % 4;
         else if(T == 13){
             if(Lokasi == 0) Menu_Transaksi();
             else if(Lokasi == 1) Menu_Data_Barang();
