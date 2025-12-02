@@ -59,7 +59,108 @@ string Nama_Kategori[5] = {
     "Makanan"
 };
 
-void menu_hapus_riwayat(){
+void simpanTransaksi(const string &isi) {
+    ofstream file("transaksi.txt", ios::app);
+    file << isi << endl;
+    file.close();
+}
+
+void tampilkanKategori(Item arr[3], string judul) {
+    ClearScreen();
+    cout << "====== " << judul << " ======" << "\n";
+    for (int i = 0; i < 3; i++) {
+        cout << i + 1 << ". " << arr[i].Nama 
+             << " - Rp " << arr[i].Harga << endl;
+    }
+    cout << "\n" << "Tekan ENTER untuk kembali...";
+    getch();
+}
+
+void Menu_Data_Barang(){
+    int pilihan = 0;
+    
+    while(true){
+        ClearScreen();
+        cout << "======= DATA BARANG =======" << '\n' << '\n';
+        cout << "Pilih barang:" << '\n';
+
+        for(int i=0; i<5; i++){
+           if(i==pilihan) cout << "=> ";
+           else cout << "  ";
+            cout << Nama_Kategori[i] << '\n';
+        }
+        
+        cout << "\n" << "W/S untuk navigasi, ENTER untuk pilih, Q untuk keluar.";
+
+        char t = getch();
+        if(t == 'w' || t == 'W') pilihan = (pilihan + 4) % 5;
+        else if(t == 's' || t == 'S') pilihan = (pilihan + 1) % 5;
+        else if(t == 13){
+            switch(pilihan){
+                case 0:
+                    tampilkanKategori(hargaBarang.Es_Krim, "ES KRIM");
+                    break;
+                case 1:
+                    tampilkanKategori(hargaBarang.Jajanan, "JAJANAN");
+                    break;
+                case 2:
+                    tampilkanKategori(hargaBarang.Minuman, "MINUMAN");
+                    break;
+                case 3:
+                    tampilkanKategori(hargaBarang.Roti, "ROTI");
+                    break;
+                case 4:
+                    tampilkanKategori(hargaBarang.Makanan, "MAKANAN");
+                    break;
+            }
+        }
+        else if(t == 'q' || t == 'Q') break;
+        }
+    };
+
+    
+void Menu_Transaksi(){
+    ClearScreen();
+    int total = 0;
+
+    cout << "=========== TRANSAKSI ===========\n";
+    while(true){
+        cout << "\n" << "Pilih kategori:" << "\n";
+        for(int i=0; i<5; i++)
+            cout << i+1 << ". " << Nama_Kategori[i] << '\n';
+
+        cout << "0. Selesai" >> "\n";
+
+        int kategori;
+        cout << "Kategori: ";
+        cin >> kategori;
+
+        if(kategori == 0) break;
+        if(kategori < 1 || kategori > 5) continue;
+
+        Item* arr;
+        switch(kategori){
+            case 1: arr = hargaBarang.Es_Krim; break;
+            case 2: arr = hargaBarang.Jajanan; break;
+            case 3: arr = hargaBarang.Minuman; break;
+            case 4: arr = hargaBarang.Roti; break;
+            case 5: arr = hargaBarang.Makanan; break;
+        }
+
+        cout << "\nPilih item:\n";
+        for(int i=0; i<3; i++)
+            cout << i+1 << ". " << arr[i].Nama << " - Rp " << arr[i].Harga << endl;
+
+        int kode;
+        cout << "Kode barang (1-3): ";
+        cin >> kode;
+
+        if(kode < 1 || kode > 3) continue;
+
+        int qty;
+    };
+
+void Menu_Hapus_Riwayat(){
     int lokasi = 0;
     string pilihan[2] = {"ya", "tidak"};
     while(true){
