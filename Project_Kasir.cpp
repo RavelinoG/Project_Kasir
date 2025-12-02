@@ -238,4 +238,4 @@ int main (){
     return 0;
 }
 
-tes tes
+semangat guys
