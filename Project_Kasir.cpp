@@ -237,5 +237,3 @@ int main (){
     Menu_Utama();
     return 0;
 }
-
-gas gas
