@@ -14,11 +14,11 @@ struct Item{
 };
 
 struct Barang{
-    string Es_Krim[3];
-    string Jajanan[3];
-    string Minuman[3];
-    string Roti[3];
-    string Makanan[3];
+    Item Es_Krim[3];
+    Item Jajanan[3];
+    Item Minuman[3];
+    Item Roti[3];
+    Item Makanan[3];
 } hargaBarang= {
     {
     {"Vanilla", 5000},
@@ -59,7 +59,7 @@ string Nama_Kategori[5] = {
     "Makanan"
 };
 
-void Menu_Hapus_Riwayat(){
+void menu_hapus_riwayat(){
     int lokasi = 0;
     string pilihan[2] = {"ya", "tidak"};
     while(true){
